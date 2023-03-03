@@ -9,7 +9,8 @@
 class Users
 {
 public:
-	Users();
+	Users() = default;
+	Users(std::string login);
 	Users(std::string fio, std::string login, std::string password);
 
 	~Users();
@@ -29,15 +30,17 @@ private:
 
 
 public:
-	bool is_login_free(std::string login); // свободен/существует ли логин
-	bool is_password_simple(std::string password); // простой ли пароль
-	bool is_password_correct(std::string password); // корректный ли пароль
+	void new_user();
+	void old_user();
 
+	bool is_login_free(std::string login); // свободен/существует ли логин
+	bool is_password_correct(std::string password); // корректный ли пароль
+	//bool is_password_simple(std::string password); // простой ли пароль
 
 	void write_to_file();
 	void read_from_file();
 
-
+	void testing();
 
 
 };
