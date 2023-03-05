@@ -129,20 +129,36 @@ void Users::read_from_file() // read from file
 
 
 
-void Users::testing()
+void Users::pass_the_test()
 {
 	this->input_f.open("D://IT/Repositories/Philipps_exam_testing/testing/direction/mathematics.txt", std::ios::in);
 	this->output_f.open(this->path + this->login + ".txt", std::ios::out | std::ios::app);
 
+	std::string temp;
+	this->input_f.seekg(4); // изменяет позицию "курсора"
+	std::cout << this->input_f.tellg() << std::endl; // возвращает текущую позицию "курсора" в файле
+
+	time_t now = time(0);
+	tm ltm;
+	localtime_s(&ltm, &now);
+	this->output_f << "\n\n\n" << ltm.tm_mday << "."
+				<< 1 + ltm.tm_mon << "."
+				<< 1900 + ltm.tm_year << " "
+				<< ltm.tm_hour << ":"
+				<< ltm.tm_min << ":"
+				<< ltm.tm_sec << std::endl;
+
 	short int question_num = 1;
 	std::string question_or_answer;
 	std::string user_answer;
-	short int correct_user_answer = 0;
+	short int correct_user_answer_num = 0;
 
+	
 	std::cout << "ТЕСТИРОВАНИЕ ПО МАТЕМАТИКЕ" << std::endl;
 	while (!this->input_f.eof())
 	{
-		getline(this->input_f, question_or_answer); // считывание вопроса
+		getline(this->input_f, question_or_answer); // чтение вопроса из файла
+		this->output_f << question_or_answer << std::endl; // запись вопроса в файл
 
 		std::cout << question_num << ". " << question_or_answer << std::endl;
 		std::cout << "Ваш ответ: "; std::cin >> user_answer; std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // ignore - нужен, так как иначе можно будет ввести 2 2 2 2, 
@@ -150,25 +166,39 @@ void Users::testing()
 																																// не идеально работает, так как, если написать 2 2, то считает только первый символ, 
 																																// который может быть ответом.
 
-		getline(this->input_f, question_or_answer); // считывание ответа
+		getline(this->input_f, question_or_answer); // чтение ответа из файла
+		this->output_f << "Ваш ответ: " << user_answer << std::endl; // запись ответа пользователя в файл
+		this->output_f << "Правильный ответ: " << question_or_answer << std::endl << std::endl; // запись правильного ответа в файл
 
 		if (question_or_answer == user_answer)
 		{
 			std::cout << "Вы ответили верно!" << std::endl << std::endl;
-			++correct_user_answer;
+			++correct_user_answer_num;
 		}
 		else
 		{
-			std::cout << "Вы ответили неверно! " << "Правильный ответ: " << question_or_answer << std::endl << std::endl;
+			std::cout << "Вы ответили неверно! " << "Правильный ответ: " << question_or_answer << std::endl;
 		}
 
-		getline(this->input_f, question_or_answer); // считывание переноса строки между одним вопросом с ответом и следующим вопросом с ответом
+		getline(this->input_f, question_or_answer); // чтение переноса строки между одним вопросом с ответом и следующим вопросом с ответом из файла
+
 		++question_num;
 	}
 
-	this->output_f << "\n" << correct_user_answer << "/" << 6;
-	std::cout << "Вы ответили на " << correct_user_answer << " из 6 вопросов." << std::endl;
+	this->output_f << std::endl << correct_user_answer_num << "/" << 6;
+	std::cout << "Вы ответили верно на " << correct_user_answer_num << " из 6 вопросов." << std::endl;
+
+
 
 	this->input_f.close();
 	this->output_f.close();
+}
+
+
+
+void Users::show_test_result()
+{
+	this->input_f.open(this->path + this->login + ".txt", std::ios::in);
+
+
 }

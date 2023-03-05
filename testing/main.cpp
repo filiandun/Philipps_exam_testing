@@ -1,6 +1,8 @@
 ﻿#include <iostream>
 #include <string>
 #include <conio.h>
+#include <ctime>
+
 
 #include "user.h"
 #include "functions.h"
@@ -35,7 +37,9 @@ int main()
 				user.old_user();
 
 				system("cls");
-				user.testing();
+				user.pass_the_test();
+
+				
 			}
 		}
 
@@ -53,7 +57,7 @@ int main()
 				user.new_user();
 
 				system("cls");
-				user.testing();
+				user.pass_the_test();
 
 			}
 		}

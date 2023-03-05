@@ -40,8 +40,8 @@ public:
 	void write_to_file();
 	void read_from_file();
 
-	void testing();
-
+	void pass_the_test();
+	void show_test_result();
 
 };
 
