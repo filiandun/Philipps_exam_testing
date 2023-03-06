@@ -33,7 +33,7 @@ void Users::old_user()
 
 
 	std::cout << "введите логин: "; std::cin >> this->login;
-	while (this->is_login_free(this->login + ".txt"))
+	while (this->is_login_free(this->login))
 	{
 		std::cout << "пользователя с таким логином не существует, попробуйте ещё раз: "; std::cin >> this->login;
 	}
@@ -54,7 +54,7 @@ void Users::new_user()
 	std::cout << "введите ваше ФИО: " << std::endl; std::getline(std::cin, this->fio);
 
 	std::cout << "придумайте ваш логин: " << std::endl; std::cin >> this->login;
-	while (!this->is_login_free(this->login + ".txt"))
+	while (!this->is_login_free(this->login))
 	{
 		std::cout << "пользователь с таким логином уже существует, попробуйте ещё раз: " << std::endl; std::cin >> this->login;
 	}
@@ -74,10 +74,9 @@ void Users::new_user()
 
 bool Users::is_login_free(std::string login)
 {
-	for (std::filesystem::path path : std::filesystem::directory_iterator(this->path)) // возвращает пути ко всем файлам из директории
+	for (std::filesystem::path path : std::filesystem::directory_iterator(this->path)) // возвращает пути ко всем папкам из директории
 	{
-		std::filesystem::path file_name = path.filename(); // возвращает именно имя файла из пути
-		if (file_name == login) // сравнение полученного имени файла и логина, который нужно проверить на свободность
+		if (path == this->path + login) // сравнение
 		{
 			return false;
 		}
@@ -102,12 +101,14 @@ bool Users::is_password_correct(std::string password)
 
 void Users::write_to_file() // write to file
 {
-	std::string path = this->path; path.append(this->login); path.append(".txt"); // костыль
+	std::filesystem::create_directories(this->path + this->login); // создание папки нового пользователя
+
+	std::string path = this->path; path.append(this->login); path.append("/"); path.append(this->login); path.append(".txt"); // костыль
 	this->output_f.open(path, std::ios::out | std::ios::app); // ios::app - для записи в конец файла
 
 	this->output_f << this->fio << std::endl;
 	this->output_f << this->login << std::endl;;
-	this->output_f << this->password << std::endl << std::endl;;
+	this->output_f << this->password;
 
 	this->output_f.close();
 }
@@ -115,7 +116,7 @@ void Users::write_to_file() // write to file
 
 void Users::read_from_file() // read from file
 {
-	std::string path = this->path; path.append(this->login); path.append(".txt"); // костыль
+	std::string path = this->path; path.append(this->login); path.append("/"); path.append(this->login); path.append(".txt"); // костыль
 	this->input_f.open(path, std::ios::in);
 
 	getline(this->input_f, this->fio);
@@ -131,29 +132,28 @@ void Users::read_from_file() // read from file
 
 void Users::pass_the_test()
 {
-	this->input_f.open("D://IT/Repositories/Philipps_exam_testing/testing/direction/mathematics.txt", std::ios::in);
-	this->output_f.open(this->path + this->login + ".txt", std::ios::out | std::ios::app);
+	std::filesystem::create_directories(this->path + this->login + "/" + "tests"); // создание папки tests для сохранения тестов
 
-	std::string temp;
-	this->input_f.seekg(4); // изменяет позицию "курсора"
-	std::cout << this->input_f.tellg() << std::endl; // возвращает текущую позицию "курсора" в файле
-
-	time_t now = time(0);
+	time_t now = time(0); // запись текущей даты и времени в строку // не очень нравится весь этот блок, может с ними ещё что-то можно сделать
 	tm ltm;
 	localtime_s(&ltm, &now);
-	this->output_f << "\n\n\n" << ltm.tm_mday << "."
-				<< 1 + ltm.tm_mon << "."
-				<< 1900 + ltm.tm_year << " "
-				<< ltm.tm_hour << ":"
-				<< ltm.tm_min << ":"
-				<< ltm.tm_sec << std::endl;
+	char buff[10];
+	std::string localtime;
+	_itoa_s(ltm.tm_mday, buff, 10); localtime.append(buff); localtime.push_back('.');
+	_itoa_s(ltm.tm_mon + 1, buff, 10); localtime.append(buff); localtime.push_back('.');
+	_itoa_s(ltm.tm_year + 1900, buff, 10); localtime.append(buff); localtime.push_back(' ');
+	_itoa_s(ltm.tm_hour, buff, 10); localtime.append(buff); localtime.push_back(';');
+	_itoa_s(ltm.tm_min, buff, 10); localtime.append(buff); localtime.push_back(';');
+	_itoa_s(ltm.tm_sec, buff, 10); localtime.append(buff);
+
+	this->input_f.open("D://IT/Repositories/Philipps_exam_testing/testing/direction/mathematics.txt", std::ios::in);
+	this->output_f.open(this->path + this->login + "/tests/" + localtime + ".txt", std::ios::out | std::ios::app);
 
 	short int question_num = 1;
 	std::string question_or_answer;
 	std::string user_answer;
 	short int correct_user_answer_num = 0;
 
-	
 	std::cout << "ТЕСТИРОВАНИЕ ПО МАТЕМАТИКЕ" << std::endl;
 	while (!this->input_f.eof())
 	{
@@ -177,18 +177,15 @@ void Users::pass_the_test()
 		}
 		else
 		{
-			std::cout << "Вы ответили неверно! " << "Правильный ответ: " << question_or_answer << std::endl;
+			std::cout << "Вы ответили неверно! " << "Правильный ответ: " << question_or_answer << std::endl << std::endl;
 		}
 
 		getline(this->input_f, question_or_answer); // чтение переноса строки между одним вопросом с ответом и следующим вопросом с ответом из файла
-
 		++question_num;
 	}
 
-	this->output_f << std::endl << correct_user_answer_num << "/" << 6;
+	this->output_f << correct_user_answer_num << "/" << 6;
 	std::cout << "Вы ответили верно на " << correct_user_answer_num << " из 6 вопросов." << std::endl;
-
-
 
 	this->input_f.close();
 	this->output_f.close();
