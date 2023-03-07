@@ -1,33 +1,7 @@
 #include "user.h"
 
 
-Users::Users(std::string login)
-{
-	this->login = login;
-
-	this->read_from_file();
-}
-
-
-Users::Users(std::string fio, std::string login, std::string password)
-{
-	this->fio = fio;
-	this->login = login;
-	this->password = password;
-
-	this->write_to_file();
-}
-
-
-Users::~Users()
-{
-}
-
-
-
-
-
-void Users::old_user()
+void User::old_user()
 {
 	std::cout << "ВХОД (чтобы вернуться назад, нажмите backspace)" << std::endl;
 
@@ -46,7 +20,7 @@ void Users::old_user()
 }
 
 
-void Users::new_user()
+void User::new_user()
 {
 	std::cout << "РЕГИСТРАЦИЯ (чтобы вернуться назад, нажмите backspace)" << std::endl;
 
@@ -71,66 +45,7 @@ void Users::new_user()
 
 
 
-
-bool Users::is_login_free(std::string login)
-{
-	for (std::filesystem::path path : std::filesystem::directory_iterator(this->path)) // возвращает пути ко всем папкам из директории
-	{
-		if (path == this->path + login) // сравнение
-		{
-			return false;
-		}
-	}
-	return true;
-}
-
-
-bool Users::is_password_correct(std::string password)
-{
-	this->read_from_file();
-	if (this->password == password)
-	{
-		return true;
-	} 
-	return false;
-}
-
-
-
-
-
-void Users::write_to_file() // write to file
-{
-	std::filesystem::create_directories(this->path + this->login); // создание папки нового пользователя
-
-	std::string path = this->path; path.append(this->login); path.append("/"); path.append(this->login); path.append(".txt"); // костыль
-	this->output_f.open(path, std::ios::out | std::ios::app); // ios::app - для записи в конец файла
-
-	this->output_f << this->fio << std::endl;
-	this->output_f << this->login << std::endl;;
-	this->output_f << this->password;
-
-	this->output_f.close();
-}
-
-
-void Users::read_from_file() // read from file
-{
-	std::string path = this->path; path.append(this->login); path.append("/"); path.append(this->login); path.append(".txt"); // костыль
-	this->input_f.open(path, std::ios::in);
-
-	getline(this->input_f, this->fio);
-	getline(this->input_f, this->login);
-	getline(this->input_f, this->password);
-
-	this->input_f.close();
-}
-
-
-
-
-
-void Users::pass_the_test()
+void User::pass_the_test()
 {
 	std::filesystem::create_directories(this->path + this->login + "/" + "tests"); // создание папки tests для сохранения тестов
 
@@ -162,9 +77,9 @@ void Users::pass_the_test()
 
 		std::cout << question_num << ". " << question_or_answer << std::endl;
 		std::cout << "Ваш ответ: "; std::cin >> user_answer; std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // ignore - нужен, так как иначе можно будет ввести 2 2 2 2, 
-																																// и символы после пробелов пойду отвечать на следующий вопросы,
-																																// не идеально работает, так как, если написать 2 2, то считает только первый символ, 
-																																// который может быть ответом.
+		// и символы после пробелов пойду отвечать на следующий вопросы,
+		// не идеально работает, так как, если написать 2 2, то считает только первый символ, 
+		// который может быть ответом.
 
 		getline(this->input_f, question_or_answer); // чтение ответа из файла
 		this->output_f << "Ваш ответ: " << user_answer << std::endl; // запись ответа пользователя в файл
@@ -192,10 +107,7 @@ void Users::pass_the_test()
 }
 
 
-
-void Users::show_test_result()
+void User::show_tests_results()
 {
-	this->input_f.open(this->path + this->login + ".txt", std::ios::in);
-
-
+	std::cout << "ПУСТО" << std::endl;
 }

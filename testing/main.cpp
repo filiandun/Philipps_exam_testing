@@ -3,8 +3,9 @@
 #include <conio.h>
 #include <ctime>
 
-
 #include "user.h"
+#include "admin.h"
+
 #include "functions.h"
 
 
@@ -13,11 +14,25 @@ int main()
 	setlocale(LC_ALL, "rus");
 	system("cls");
 
+
+
+
+	//Admin admin;
+	//admin.new_user();
+
+	//system("cls");
+	//admin.edit_user();
+
+	//system("cls");
+	//admin.delete_user();
+
+
+
 	std::cout << "ТЕСТИРОВАНИЕ" << std::endl;
 	std::cout << "> вход" << std::endl;
 	std::cout << "  регистрация" << std::endl;
 
-	Users user;
+	User user;
 	short int button = 0;
 	while (true)
 	{
@@ -37,9 +52,7 @@ int main()
 				user.old_user();
 
 				system("cls");
-				user.pass_the_test();
-
-				
+				user.pass_the_test();			
 			}
 		}
 
