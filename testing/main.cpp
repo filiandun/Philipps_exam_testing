@@ -17,7 +17,7 @@ int main()
 
 
 
-	//Admin admin;
+	Admin admin;
 	//admin.new_user();
 
 	//system("cls");
@@ -25,6 +25,16 @@ int main()
 
 	//system("cls");
 	//admin.delete_user();
+
+
+	system("cls");
+	admin.new_test();
+
+	system("cls");
+	admin.edit_test();
+
+	system("cls");
+	admin.delete_test();
 
 
 
@@ -81,3 +91,20 @@ int main()
 
 	return 0;
 }
+
+
+
+
+/*
+* 1. Как стоит писать функции? 
+* Чтобы в ней были все std::cout, std::cin или нет? Например: new_user() и is_login_free()
+* 
+* 2. Как организовать классы Users, User, Admin?
+* 
+* 3. Стоит ли писать std::string file_name; std::cout << "Введите название теста: "; getline(std::cin, file_name); ?
+* Или лучше не писать так в одну строчку?
+* 
+* 
+* 
+
+*/
