@@ -3,18 +3,14 @@
 #include <conio.h>
 #include <ctime>
 
-#include "user.h"
 #include "admin.h"
-
-#include "functions.h"
+#include "user.h"
 
 
 int main()
 {
 	setlocale(LC_ALL, "rus");
 	system("cls");
-
-
 
 
 	Admin admin;
@@ -27,14 +23,15 @@ int main()
 	//admin.delete_user();
 
 
-	system("cls");
-	admin.new_test();
 
-	system("cls");
-	admin.edit_test();
+	//system("cls");
+	//admin.new_test();
 
-	system("cls");
-	admin.delete_test();
+	//system("cls");
+	//admin.edit_test();
+
+	//system("cls");
+	//admin.delete_test();
 
 
 
@@ -91,20 +88,3 @@ int main()
 
 	return 0;
 }
-
-
-
-
-/*
-* 1. Как стоит писать функции? 
-* Чтобы в ней были все std::cout, std::cin или нет? Например: new_user() и is_login_free()
-* 
-* 2. Как организовать классы Users, User, Admin?
-* 
-* 3. Стоит ли писать std::string file_name; std::cout << "Введите название теста: "; getline(std::cin, file_name); ?
-* Или лучше не писать так в одну строчку?
-* 
-* 
-* 
-
-*/

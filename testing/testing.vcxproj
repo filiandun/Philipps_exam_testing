@@ -131,12 +131,10 @@
     <ClCompile Include="admin.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="user.cpp" />
-    <ClCompile Include="users.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="admin.h" />
     <ClInclude Include="user.h" />
-    <ClInclude Include="users.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

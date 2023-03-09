@@ -1,9 +1,8 @@
 #pragma once
-#include "users.h"
 #include "user.h"
 
 
-class Admin : protected Users
+class Admin : public User
 {
 public:
 	Admin() = default;
@@ -13,14 +12,14 @@ private:
 	bool are_tests_names_free(std::string file_name);
 
 public:
-	void new_user() final override; // работает
 	void edit_user(); // работает
 	void delete_user(); // работает
 
-	void new_test();
-	void edit_test();
+	void new_test(); // работает
+	void edit_test(); // работает
 	void delete_test(); // работает
-	void show_tests_results() final override;
+
+	void show_tests_results();
 
 };
 

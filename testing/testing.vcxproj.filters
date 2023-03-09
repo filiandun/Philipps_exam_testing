@@ -18,20 +18,14 @@
     <ClCompile Include="main.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="users.cpp">
+    <ClCompile Include="user.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="admin.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="user.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="users.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="admin.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
