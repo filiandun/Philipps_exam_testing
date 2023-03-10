@@ -1,6 +1,18 @@
 #include "admin.h"
 
 
+Admin::Admin()
+{
+	if (this->is_login_free("admin"))
+	{
+		std::cout << "ДОБРОГО ВРЕМЕНИ СУТОК, ВЫ БЕРЁТЕ НА СЕБЯ РОЛЬ АДМИНА" << std::endl;
+		std::cout << "ваш логин установлен автоматически: admin" << std::endl; this->login = "admin";
+		std::cout << "придумайте себе пароль: "; getline(std::cin, this->password);
+
+		this->write_to_file();
+	}
+}
+
 bool Admin::are_tests_names_free(std::string file_name)
 {
 	for (std::filesystem::path path : std::filesystem::directory_iterator(this->path + "tests/")) // возвращает пути ко всем папкам из директории
@@ -24,7 +36,7 @@ void Admin::edit_user()
 
 	User new_user;
 
-	std::cout << "введите логин: "; std::cin >> new_user.login;
+	std::cout << "введите логин пользователя, данные которого хотите изменить: "; std::cin >> new_user.login;
 	while (this->is_login_free(new_user.login))
 	{
 		std::cout << "пользователя с таким логином не существует, попробуйте ещё раз: "; std::cin >> new_user.login;
@@ -34,7 +46,7 @@ void Admin::edit_user()
 
 	while (true) // user.is_password_simple(password)
 	{
-		std::cout << "придумайте новый пароль пользователя: "; std::cin >> new_user.password;
+		std::cout << "введите новый пароль пользователя: "; std::cin >> new_user.password;
 		break;
 	}
 
@@ -47,7 +59,7 @@ void Admin::delete_user()
 	std::cout << "УДАЛЕНИЕ ДАННЫХ ПОЛЬЗОВАТЕЛЯ (чтобы вернуться назад, нажмите backspace)" << std::endl;
 
 	User deleted_user;
-	std::cout << "введите логин: "; std::cin >> deleted_user.login;
+	std::cout << "введите логин пользователя, данные которого вы хотите удалить: "; std::cin >> deleted_user.login;
 	while (this->is_login_free(deleted_user.login))
 	{
 		std::cout << "пользователя с таким логином не существует, попробуйте ещё раз: "; std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); std::cin >> deleted_user.login;
@@ -70,25 +82,24 @@ void Admin::new_test()
 	{
 		std::cout << "Это имя теста уже занято, попробуйте ещё раз: "; getline(std::cin, file_name);
 	}
-
 	this->output_f.open(this->path + "tests/" + file_name + ".txt");
 
-	short int questions_num; std::cout << "Введите кол-во вопросов в будущем тесте: "; std::cin >> questions_num; std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	std::string description; std::cout << "Введите небольшое описание к тесту: "; getline(std::cin, description); this->output_f << "&Description: " << description << std::endl << std::endl;
+	short int questions_num; std::cout << "Введите кол-во вопросов в будущем тесте: "; std::cin >> questions_num; std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); this->output_f << "&Questions num: " << questions_num << std::endl << std::endl;
+	this->output_f << "&Test:" << std::endl;
 
+	std::string question_or_answer; 
 	for (int i = 0; i < questions_num; ++i)
 	{				
-		std::string question_or_answer; 
 
-		std::cout << std::endl <<  "Введите вопрос: "; getline(std::cin, question_or_answer); 
-		this->output_f << i + 1 << ". " << question_or_answer << std::endl;
+		std::cout << std::endl << "Введите вопрос: "; getline(std::cin, question_or_answer); 
+		this->output_f << i + 1 << ": " << question_or_answer << std::endl;
 
 		std::cout << "Введите ответ на вопрос: "; getline(std::cin, question_or_answer);
 		i == (questions_num - 1) ? this->output_f << question_or_answer : this->output_f << question_or_answer << std::endl << std::endl; // тернарный оператора нужен для того, чтобы в последнем вопросе не ставились лишние два endl
 		// ЧТО-ТО ТУТ НЕ ТАК, НЕ ВСЕГДА ПОСЛЕДНИЙ ОТВЕТ ДОБАВЛЯЕТ, ЗАКОНОМЕРНОСТИ НЕ ВЫЯВЛЕНО
 		// вроде бы пофикшено, так как добавил закрытие потока
 	}
-	this->output_f << std::endl << std::endl << questions_num; // добавляется кол-во вопросов в конец файла
-
 	this->output_f.close();
 }
 

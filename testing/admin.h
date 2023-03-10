@@ -5,7 +5,7 @@
 class Admin : public User
 {
 public:
-	Admin() = default;
+	Admin();
 	~Admin() = default;
 
 private:
