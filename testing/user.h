@@ -11,9 +11,14 @@ class User
 public:
 	User() = default;
 	User(std::string path); // дслюч, врн опх оепбнл гюосяйе, с юдлхмю мсфмн яопюьхбюрэ, йсдю янупюмърэ бяе дюммше
-	~User() = default;
+	~User()
+	{
+		std::cout << "~USER" << std::endl; system("pause");
+	}
 
-protected:
+	void operator=(const User& user);
+
+public:
 	std::string path = "D://IT/Repositories/Philipps_exam_testing/testing/";
 
 	std::ifstream input_f;

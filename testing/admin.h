@@ -8,6 +8,8 @@ public:
 	Admin();
 	~Admin() = default;
 
+	void operator=(const Admin& admin);
+
 private:
 	bool are_tests_names_free(std::string file_name);
 
@@ -22,4 +24,3 @@ public:
 	void show_tests_results();
 
 };
-

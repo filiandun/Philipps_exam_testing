@@ -13,6 +13,18 @@ Admin::Admin()
 	}
 }
 
+void Admin::operator=(const Admin& admin)
+{
+	this->fio = admin.fio;
+	this->login = admin.login;
+	this->password = admin.password;
+}
+
+
+
+
+
+
 bool Admin::are_tests_names_free(std::string file_name)
 {
 	for (std::filesystem::path path : std::filesystem::directory_iterator(this->path + "tests/")) // возвращает пути ко всем папкам из директории

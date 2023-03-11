@@ -6,6 +6,18 @@ User::User(std::string path)
 	this->path = path;
 }
 
+void User::operator=(const User& user)
+{
+	this->fio = user.fio;
+	this->login = user.login;
+	this->password = user.password;
+}
+
+
+
+
+
+
 void User::write_to_file()
 {
 	std::filesystem::create_directories(this->path + "users/" + this->login); // создание папки нового пользователя
@@ -199,6 +211,9 @@ void User::show_tests_results()
 		}
 		this->input_f.close();
 	}
+	
+	std::cout << std::endl;
+	system("pause");
 }
 
 //template <class _Elem, class _Traits>
