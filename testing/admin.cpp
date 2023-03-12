@@ -5,11 +5,17 @@ Admin::Admin()
 {
 	if (this->is_login_free("admin"))
 	{
-		std::cout << "ÄÎÁĞÎÃÎ ÂĞÅÌÅÍÈ ÑÓÒÎÊ, ÂÛ ÁÅĞ¨ÒÅ ÍÀ ÑÅÁß ĞÎËÜ ÀÄÌÈÍÀ" << std::endl;
+		std::cout << "ÄÎÁĞÎÃÎ ÂĞÅÌÅÍÈ ÑÓÒÎÊ, ÂÛ ÁÅĞ¨ÒÅ ÍÀ ÑÅÁß ĞÎËÜ ÀÄÌÈÍÈÑÒĞÀÒÎĞÀ" << std::endl;
+		std::cout << "ââåäèòå âàøå ÔÈÎ: "; getline(std::cin, this->fio);
 		std::cout << "âàø ëîãèí óñòàíîâëåí àâòîìàòè÷åñêè: admin" << std::endl; this->login = "admin";
 		std::cout << "ïğèäóìàéòå ñåáå ïàğîëü: "; getline(std::cin, this->password);
 
 		this->write_to_file();
+	}
+	else
+	{
+		this->login = "admin";
+		this->read_from_file();
 	}
 }
 
@@ -63,6 +69,8 @@ void Admin::edit_user()
 	}
 
 	new_user.write_to_file();
+
+	std::cout << "ÄÀÍÍÛÅ ÏÎËÜÇÎÂÀÒÅËß ÓÑÏÅØÍÎ ÈÇÌÅÍÅÍÛ" << std::endl << std::endl; system("pause");
 }
 
 
@@ -78,6 +86,8 @@ void Admin::delete_user()
 	}
 
 	std::filesystem::remove_all(this->path + "users/" + deleted_user.login);
+
+	std::cout << "ÏÎËÜÇÎÂÀÒÅËÜ ÓÑÏÅØÍÎ ÓÄÀË¨Í" << std::endl << std::endl; system("pause");
 }
 
 
@@ -89,7 +99,7 @@ void Admin::new_test()
 {
 	std::cout << "ÑÎÇÄÀÍÈÅ ÍÎÂÎÃÎ ÒÅÑÒÀ (÷òîáû âåğíóòüñÿ íàçàä, íàæìèòå backspace)" << std::endl;
 
-	std::string file_name; std::cout << "Ââåäèòå íàçâàíèå áóäóùåãî òåñòà: "; getline(std::cin, file_name);
+	std::string file_name; std::cout << "Ââåäèòå íàçâàíèå áóäóùåãî òåñòà: "; std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); getline(std::cin, file_name);
 	while (!this->are_tests_names_free(file_name))
 	{
 		std::cout << "İòî èìÿ òåñòà óæå çàíÿòî, ïîïğîáóéòå åù¸ ğàç: "; getline(std::cin, file_name);
@@ -113,6 +123,8 @@ void Admin::new_test()
 		// âğîäå áû ïîôèêøåíî, òàê êàê äîáàâèë çàêğûòèå ïîòîêà
 	}
 	this->output_f.close();
+
+	std::cout << "ÒÅÑÒ ÓÑÏÅØÍÎ ÑÎÇÄÀÍ" << std::endl << std::endl; system("pause");
 }
 
 
@@ -125,7 +137,7 @@ void Admin::edit_test()
 	{
 		std::cout << "Òåñò íå íàéäåí, ïîïğîáóéòå åù¸ ğàç: "; getline(std::cin, file_name);
 	}
-	std::cout << "Òåñò íàéäåí" << std::endl;
+	std::cout << "ÒÅÑÒ ÍÀÉÄÅÍ" << std::endl << std::endl; system("pause");
 }
 
 
@@ -139,10 +151,9 @@ void Admin::delete_test()
 	{
 		std::cout << "Òåñò íå íàéäåí, ââåäèòå íàçâàíèå òåñòà ïîâòîğíî: "; getline(std::cin, file_name);
 	}
-	std::filesystem::remove(this->path + "tests/" + file_name + ".txt");
-	std::cout << "Òåñò óñïåøíî óäàë¸í" << std::endl;
-	// ×ÒÎ-ÒÎ ÒÓÒ ÍÅ ÒÀÊ, ÈÍÎÃÄÀ ÎØÈÁÊÓ ÊÈÄÀÅÒ ÏĞÈ ÓÄÀËÅÍÈÈ, ÇÀÊÎÍÎÌÅĞÍÎÑÒÜ - ÑÒÀĞÛÅ ÔÀÉËÛ ÓÄÀËßÅÒ, ÒÎËÜÊÎ ×ÒÎ ÑÎÇÄÀÍÍÛÉ - ÍÅÒ
-	// ïğîáëåìà, âğîäå áû, ğåøåíà: ïîòîê çàáûë çàêğûòü, ñåé÷àñ âñ¸ íîğìàëüíî óäàëÿåòñÿ
+	std::filesystem::remove(this->path + "tests/" + file_name + ".txt"); // ñàìî óäàëåíèå òåñòà
+
+	std::cout << "ÒÅÑÒ ÓÑÏÅØÍÎ ÓÄÀË¨Í" << std::endl << std::endl; system("pause");
 }
 
 

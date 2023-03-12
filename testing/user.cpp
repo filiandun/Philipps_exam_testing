@@ -139,7 +139,7 @@ void User::pass_the_test()
 
 	this->output_f.open(this->path + "users/" + this->login + "/tests results/" + localtime + ".txt", std::ios::out | std::ios::app);
 
-	std::cout << "Тесты: " << std::endl;
+	std::cout << "СУЩЕСТВУЮЩИЕ ТЕСТЫ: " << std::endl;
 	std::filesystem::path path;
 	for (std::filesystem::path temp_path : std::filesystem::directory_iterator(this->path + "tests/")) // возвращает пути ко всем папкам из директории
 	{
@@ -188,10 +188,11 @@ void User::pass_the_test()
 	}
 
 	this->output_f << correct_user_answer_num << "/" << questions_num;
-	std::cout << "Вы ответили верно на " << correct_user_answer_num << " из " << questions_num << " вопросов" << std::endl;
 
 	this->input_f.close();
 	this->output_f.close();
+
+	std::cout << "Вы ответили верно на " << correct_user_answer_num << " из " << questions_num << " вопросов" << std::endl << std::endl; system("pause");
 }
 
 

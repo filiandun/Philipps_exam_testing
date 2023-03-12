@@ -11,10 +11,7 @@ class User
 public:
 	User() = default;
 	User(std::string path); // дслюч, врн опх оепбнл гюосяйе, с юдлхмю мсфмн яопюьхбюрэ, йсдю янупюмърэ бяе дюммше
-	~User()
-	{
-		std::cout << "~USER" << std::endl; system("pause");
-	}
+	~User() = default;
 
 	void operator=(const User& user);
 
