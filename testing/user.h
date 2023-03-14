@@ -6,13 +6,15 @@
 #include <stdlib.h> // для работы _itoa_s()
 #include <exception> // для работы с ошибками
 #include <conio.h> // для работы с нажатыми клавишами
+#include <windows.h> // для работы с консолью
+
 
 class User
 {
 public:
 	User() = default;
 	User(std::string path); // ДУМАЮ, ЧТО ПРИ ПЕРВОМ ЗАПУСКЕ, У АДМИНА НУЖНО СПРАШИВАТЬ, КУДА СОХРАНЯТЬ ВСЕ ДАННЫЕ
-	~User() = default;
+	~User();
 
 	void operator=(const User& user);
 
@@ -27,24 +29,12 @@ public:
 	std::string password;
 
 public:
-	std::string crypt(std::string in, int key) const
-	{
-		int in_length = in.length();
-
-		std::string out; out.resize(in_length);
-
-		for (int i = 0; i < in_length; ++i)
-		{
-			out[i] = in[i] ^ key;
-		}
-
-		return out;
-	}
-
+	std::string crypt(std::string in, int key) const;
 
 	void write_to_file();
 	void read_from_file();
 
+	bool are_files_exist(std::string path) const;
 	bool are_tests_names_free(std::string file_name) const;
 	bool is_login_free(std::string login) const; // свободен/существует ли логин
 	bool is_password_correct(std::string password); // верный ли пароль
@@ -58,5 +48,33 @@ public:
 
 
 	friend class Admin;
+	friend class Menu;
+
+
+	enum ConsoleColor // цвета
+	{
+		Black = 0,
+		Blue = 1,
+		Green = 2,
+		Cyan = 3,
+		Red = 4,
+		Magenta = 5,
+		Brown = 6,
+		LightGray = 7,
+		DarkGray = 8,
+		LightBlue = 9,
+		LightGreen = 10,
+		LightCyan = 11,
+		LightRed = 12,
+		LightMagenta = 13,
+		Yellow = 14,
+		White = 15
+	};
+
+	void set_color(int text_color, int background_color) const // функция установки цвета
+	{
+		HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
+		SetConsoleTextAttribute(hStdOut, (WORD)((background_color << 4) | text_color));
+	}
 };
 

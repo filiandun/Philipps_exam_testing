@@ -9,9 +9,6 @@
 
 class Menu
 {
-//friend class UserMenu;
-//friend class AdminMenu;
-
 public:
 	Menu();
 	Menu(User* user);

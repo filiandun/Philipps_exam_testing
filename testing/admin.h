@@ -8,8 +8,6 @@ public:
 	Admin();
 	~Admin() = default;
 
-	void operator=(const Admin& admin);
-
 public:
 	void new_user() const;
 	void edit_user() const;

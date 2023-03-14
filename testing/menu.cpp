@@ -1,4 +1,5 @@
 #include "menu.h"
+#include "user.h"
 
 
 
@@ -10,6 +11,7 @@ Menu::Menu()
 	this->max_position = 3;
 }
 
+
 Menu::Menu(User* user)
 {
 	this->user = user;
@@ -17,6 +19,8 @@ Menu::Menu(User* user)
 	this->current_position = 0;
 	this->max_position = 3;
 }
+
+
 
 
 
@@ -30,6 +34,7 @@ void Menu::do_it(short int current_position)
 	case 2: exit(0);
 	}
 }
+
 
 void Menu::choice() // ôóíêöèÿ âûáîğà
 {
@@ -50,14 +55,12 @@ void Menu::choice() // ôóíêöèÿ âûáîğà
 }
 
 
-
-
 void Menu::menu()
 {
 	if (current_position == 0)
 	{
 		system("cls");
-		this->set_color(2, 0); std::cout << "ÏĞÎÃĞÀÌÌÀ ÄËß ÏĞÎÕÎÆÄÅÍÈß ÒÅÑÒÈĞÎÂÀÍÈÉ" << std::endl; this->set_color(15, 0);
+		this->set_color(9, 0); std::cout << "ÏĞÎÃĞÀÌÌÀ ÄËß ÏĞÎÕÎÆÄÅÍÈß ÒÅÑÒÈĞÎÂÀÍÈÉ" << std::endl; this->set_color(15, 0);
 
 		this->set_color(6, 0); std::cout << "> âõîä" << std::endl; this->set_color(15, 0);
 		std::cout << "  ğåãèñòğàöèÿ" << std::endl << std::endl;
@@ -70,7 +73,7 @@ void Menu::menu()
 	if (current_position == 1)
 	{
 		system("cls");
-		this->set_color(2, 0); std::cout << "ÏĞÎÃĞÀÌÌÀ ÄËß ÏĞÎÕÎÆÄÅÍÈß ÒÅÑÒÈĞÎÂÀÍÈÉ" << std::endl; this->set_color(15, 0);
+		this->set_color(9, 0); std::cout << "ÏĞÎÃĞÀÌÌÀ ÄËß ÏĞÎÕÎÆÄÅÍÈß ÒÅÑÒÈĞÎÂÀÍÈÉ" << std::endl; this->set_color(15, 0);
 
 		std::cout << "  âõîä" << std::endl;
 		this->set_color(6, 0); std::cout << "> ğåãèñòğàöèÿ" << std::endl << std::endl; this->set_color(15, 0);
@@ -83,7 +86,7 @@ void Menu::menu()
 	if (current_position == 2)
 	{
 		system("cls");
-		this->set_color(2, 0); std::cout << "ÏĞÎÃĞÀÌÌÀ ÄËß ÏĞÎÕÎÆÄÅÍÈß ÒÅÑÒÈĞÎÂÀÍÈÉ" << std::endl; this->set_color(15, 0);
+		this->set_color(9, 0); std::cout << "ÏĞÎÃĞÀÌÌÀ ÄËß ÏĞÎÕÎÆÄÅÍÈß ÒÅÑÒÈĞÎÂÀÍÈÉ" << std::endl; this->set_color(15, 0);
 
 		std::cout << "  âõîä" << std::endl;
 		std::cout << "  ğåãèñòğàöèÿ" << std::endl << std::endl;
@@ -99,6 +102,10 @@ void Menu::menu()
 
 
 
+
+
+
+
 UserMenu::UserMenu(User* user)
 {
 	this->user = user;
@@ -106,6 +113,7 @@ UserMenu::UserMenu(User* user)
 	this->current_position = 0;
 	this->max_position = 3;
 }
+
 
 
 
@@ -138,12 +146,13 @@ void UserMenu::choice()
 	}
 }
 
+
 void UserMenu::menu()
 {
 	if (this->current_position == 0)
 	{
 		system("cls");
-		this->set_color(2, 0); std::cout << "ÇÄĞÀÂÑÒÂÓÉÒÅ, " << user->fio << ", ÂÛÁÅĞÈÒÅ, ×ÒÎ ÂÛ ÕÎÒÈÒÅ ÑÄÅËÀÒÜ: " << std::endl; this->set_color(15, 0);
+		this->set_color(9, 0); std::cout << "ÇÄĞÀÂÑÒÂÓÉÒÅ, " << user->fio << ", ÂÛÁÅĞÈÒÅ, ×ÒÎ ÂÛ ÕÎÒÈÒÅ ÑÄÅËÀÒÜ: " << std::endl; this->set_color(15, 0);
 
 		this->set_color(6, 0); std::cout << "> ïğîéòè òåñòèğîâàíèå" << std::endl; this->set_color(15, 0);
 		std::cout << "  ïîñìîòğåòü ğåçóëüòàòû ïğîøëûõ òåñòèğîâàíèé" << std::endl << std::endl;
@@ -156,7 +165,7 @@ void UserMenu::menu()
 	if (this->current_position == 1)
 	{
 		system("cls");
-		this->set_color(2, 0); std::cout << "ÇÄĞÀÂÑÒÂÓÉÒÅ, " << user->fio << ", ÂÛÁÅĞÈÒÅ, ×ÒÎ ÂÛ ÕÎÒÈÒÅ ÑÄÅËÀÒÜ: " << std::endl; this->set_color(15, 0);
+		this->set_color(9, 0); std::cout << "ÇÄĞÀÂÑÒÂÓÉÒÅ, " << user->fio << ", ÂÛÁÅĞÈÒÅ, ×ÒÎ ÂÛ ÕÎÒÈÒÅ ÑÄÅËÀÒÜ: " << std::endl; this->set_color(15, 0);
 
 		std::cout << "  ïğîéòè òåñòèğîâàíèå" << std::endl;
 		this->set_color(6, 0); std::cout << "> ïîñìîòğåòü ğåçóëüòàòû ïğîøëûõ òåñòèğîâàíèé" << std::endl << std::endl; this->set_color(15, 0);
@@ -169,7 +178,7 @@ void UserMenu::menu()
 	if (this->current_position == 2)
 	{
 		system("cls");
-		this->set_color(2, 0); std::cout << "ÇÄĞÀÂÑÒÂÓÉÒÅ, " << user->fio << ", ÂÛÁÅĞÈÒÅ, ×ÒÎ ÂÛ ÕÎÒÈÒÅ ÑÄÅËÀÒÜ: " << std::endl; this->set_color(15, 0);
+		this->set_color(9, 0); std::cout << "ÇÄĞÀÂÑÒÂÓÉÒÅ, " << user->fio << ", ÂÛÁÅĞÈÒÅ, ×ÒÎ ÂÛ ÕÎÒÈÒÅ ÑÄÅËÀÒÜ: " << std::endl; this->set_color(15, 0);
 
 		std::cout << "  ïğîéòè òåñòèğîâàíèå" << std::endl;
 		std::cout << "  ïîñìîòğåòü ğåçóëüòàòû ïğîøëûõ òåñòèğîâàíèé" << std::endl << std::endl;
@@ -185,6 +194,8 @@ void UserMenu::menu()
 
 
 
+
+
 AdminMenu::AdminMenu(Admin* admin)
 {
 	this->admin = admin;
@@ -192,6 +203,7 @@ AdminMenu::AdminMenu(Admin* admin)
 	this->current_position = 0;
 	this->max_position = 8;
 }
+
 
 
 
@@ -212,6 +224,7 @@ void AdminMenu::do_it(short int current_position)
 	}
 }
 
+
 void AdminMenu::choice()
 {
 	short int pressed_button;
@@ -230,12 +243,13 @@ void AdminMenu::choice()
 	}
 }
 
+
 void AdminMenu::menu()
 {
 	if (this->current_position == 0)
 	{
 		system("cls");
-		this->set_color(4, 0); std::cout << "ÇÄĞÀÂÑÒÂÓÉÒÅ, " << admin->fio << ", ÂÛÁÅĞÈÒÅ, ×ÒÎ ÂÛ ÕÎÒÈÒÅ ÑÄÅËÀÒÜ: " << std::endl; this->set_color(15, 0);
+		this->set_color(13, 0); std::cout << "ÇÄĞÀÂÑÒÂÓÉÒÅ, " << admin->fio << ", ÂÛÁÅĞÈÒÅ, ×ÒÎ ÂÛ ÕÎÒÈÒÅ ÑÄÅËÀÒÜ: " << std::endl; this->set_color(15, 0);
 
 		this->set_color(6, 0); std::cout << "> çàğåãèñòğèğîâàòü íîâîãî ïîäîïûòíîãî" << std::endl; this->set_color(15, 0);
 		std::cout << "  èçìåíèòü äàííûå ñóùåñòâóşùåãî ïîäîïûòíîãî" << std::endl;
@@ -254,7 +268,7 @@ void AdminMenu::menu()
 	if (this->current_position == 1)
 	{
 		system("cls");
-		this->set_color(4, 0); std::cout << "ÇÄĞÀÂÑÒÂÓÉÒÅ, " << admin->fio << ", ÂÛÁÅĞÈÒÅ, ×ÒÎ ÂÛ ÕÎÒÈÒÅ ÑÄÅËÀÒÜ: " << std::endl; this->set_color(15, 0);
+		this->set_color(13, 0); std::cout << "ÇÄĞÀÂÑÒÂÓÉÒÅ, " << admin->fio << ", ÂÛÁÅĞÈÒÅ, ×ÒÎ ÂÛ ÕÎÒÈÒÅ ÑÄÅËÀÒÜ: " << std::endl; this->set_color(15, 0);
 
 		std::cout << "  çàğåãèñòğèğîâàòü íîâîãî ïîäîïûòíîãî" << std::endl;
 		this->set_color(6, 0); std::cout << "> èçìåíèòü äàííûå ñóùåñòâóşùåãî ïîäîïûòíîãî" << std::endl; this->set_color(15, 0);
@@ -273,7 +287,7 @@ void AdminMenu::menu()
 	if (this->current_position == 2)
 	{
 		system("cls");
-		this->set_color(4, 0); std::cout << "ÇÄĞÀÂÑÒÂÓÉÒÅ, " << admin->fio << ", ÂÛÁÅĞÈÒÅ, ×ÒÎ ÂÛ ÕÎÒÈÒÅ ÑÄÅËÀÒÜ: " << std::endl; this->set_color(15, 0);
+		this->set_color(13, 0); std::cout << "ÇÄĞÀÂÑÒÂÓÉÒÅ, " << admin->fio << ", ÂÛÁÅĞÈÒÅ, ×ÒÎ ÂÛ ÕÎÒÈÒÅ ÑÄÅËÀÒÜ: " << std::endl; this->set_color(15, 0);
 
 		std::cout << "  çàğåãèñòğèğîâàòü íîâîãî ïîäîïûòíîãî" << std::endl;
 		std::cout << "  èçìåíèòü äàííûå ñóùåñòâóşùåãî ïîäîïûòíîãî" << std::endl;
@@ -292,7 +306,7 @@ void AdminMenu::menu()
 	if (this->current_position == 3)
 	{
 		system("cls");
-		this->set_color(4, 0); std::cout << "ÇÄĞÀÂÑÒÂÓÉÒÅ, " << admin->fio << ", ÂÛÁÅĞÈÒÅ, ×ÒÎ ÂÛ ÕÎÒÈÒÅ ÑÄÅËÀÒÜ: " << std::endl; this->set_color(15, 0);
+		this->set_color(13, 0); std::cout << "ÇÄĞÀÂÑÒÂÓÉÒÅ, " << admin->fio << ", ÂÛÁÅĞÈÒÅ, ×ÒÎ ÂÛ ÕÎÒÈÒÅ ÑÄÅËÀÒÜ: " << std::endl; this->set_color(15, 0);
 
 		std::cout << "  çàğåãèñòğèğîâàòü íîâîãî ïîäîïûòíîãî" << std::endl;
 		std::cout << "  èçìåíèòü äàííûå ñóùåñòâóşùåãî ïîäîïûòíîãî" << std::endl;
@@ -311,7 +325,7 @@ void AdminMenu::menu()
 	if (this->current_position == 4)
 	{
 		system("cls");
-		this->set_color(4, 0); std::cout << "ÇÄĞÀÂÑÒÂÓÉÒÅ, " << admin->fio << ", ÂÛÁÅĞÈÒÅ, ×ÒÎ ÂÛ ÕÎÒÈÒÅ ÑÄÅËÀÒÜ: " << std::endl; this->set_color(15, 0);
+		this->set_color(13, 0); std::cout << "ÇÄĞÀÂÑÒÂÓÉÒÅ, " << admin->fio << ", ÂÛÁÅĞÈÒÅ, ×ÒÎ ÂÛ ÕÎÒÈÒÅ ÑÄÅËÀÒÜ: " << std::endl; this->set_color(15, 0);
 
 		std::cout << "  çàğåãèñòğèğîâàòü íîâîãî ïîäîïûòíîãî" << std::endl;
 		std::cout << "  èçìåíèòü äàííûå ñóùåñòâóşùåãî ïîäîïûòíîãî" << std::endl;
@@ -330,7 +344,7 @@ void AdminMenu::menu()
 	if (this->current_position == 5)
 	{
 		system("cls");
-		this->set_color(4, 0); std::cout << "ÇÄĞÀÂÑÒÂÓÉÒÅ, " << admin->fio << ", ÂÛÁÅĞÈÒÅ, ×ÒÎ ÂÛ ÕÎÒÈÒÅ ÑÄÅËÀÒÜ: " << std::endl; this->set_color(15, 0);
+		this->set_color(13, 0); std::cout << "ÇÄĞÀÂÑÒÂÓÉÒÅ, " << admin->fio << ", ÂÛÁÅĞÈÒÅ, ×ÒÎ ÂÛ ÕÎÒÈÒÅ ÑÄÅËÀÒÜ: " << std::endl; this->set_color(15, 0);
 
 		std::cout << "  çàğåãèñòğèğîâàòü íîâîãî ïîäîïûòíîãî" << std::endl;
 		std::cout << "  èçìåíèòü äàííûå ñóùåñòâóşùåãî ïîäîïûòíîãî" << std::endl;
@@ -349,7 +363,7 @@ void AdminMenu::menu()
 	if (this->current_position == 6)
 	{
 		system("cls");
-		this->set_color(4, 0); std::cout << "ÇÄĞÀÂÑÒÂÓÉÒÅ, " << admin->fio << ", ÂÛÁÅĞÈÒÅ, ×ÒÎ ÂÛ ÕÎÒÈÒÅ ÑÄÅËÀÒÜ: " << std::endl; this->set_color(15, 0);
+		this->set_color(13, 0); std::cout << "ÇÄĞÀÂÑÒÂÓÉÒÅ, " << admin->fio << ", ÂÛÁÅĞÈÒÅ, ×ÒÎ ÂÛ ÕÎÒÈÒÅ ÑÄÅËÀÒÜ: " << std::endl; this->set_color(15, 0);
 
 		std::cout << "  çàğåãèñòğèğîâàòü íîâîãî ïîäîïûòíîãî" << std::endl;
 		std::cout << "  èçìåíèòü äàííûå ñóùåñòâóşùåãî ïîäîïûòíîãî" << std::endl;
@@ -368,7 +382,7 @@ void AdminMenu::menu()
 	if (this->current_position == 7)
 	{
 		system("cls");
-		this->set_color(4, 0); std::cout << "ÇÄĞÀÂÑÒÂÓÉÒÅ, " << admin->fio << ", ÂÛÁÅĞÈÒÅ, ×ÒÎ ÂÛ ÕÎÒÈÒÅ ÑÄÅËÀÒÜ: " << std::endl; this->set_color(15, 0);
+		this->set_color(13, 0); std::cout << "ÇÄĞÀÂÑÒÂÓÉÒÅ, " << admin->fio << ", ÂÛÁÅĞÈÒÅ, ×ÒÎ ÂÛ ÕÎÒÈÒÅ ÑÄÅËÀÒÜ: " << std::endl; this->set_color(15, 0);
 
 		std::cout << "  çàğåãèñòğèğîâàòü íîâîãî ïîäîïûòíîãî" << std::endl;
 		std::cout << "  èçìåíèòü äàííûå ñóùåñòâóşùåãî ïîäîïûòíîãî" << std::endl;
